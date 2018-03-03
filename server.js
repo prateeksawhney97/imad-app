@@ -5,7 +5,8 @@ var path = require('path');
 var app = express();
 app.use(morgan('combined'));
 
-var articleOne = {
+var articles = {
+'article-one': {
     title: 'Article One | Prateek Sawhney',
     heading : 'Article One',
     date: 'March 02, 2018',
@@ -18,6 +19,23 @@ var articleOne = {
             <p>
                Et consequat cras, at dapibus in lectus, fringilla scelerisque necipit sed aliquam eros interdum odio auctor, suscipit et. Mauris neque ut, in sed ultricies, elit veniam praesent rhoncuornare in, ullamcorper sem ut et, lacus at gravida. Optio mattis maecenas, ad pellentesque pulvinar eu ut phasellus lectus. Orci mi commodo volutpat wisi, nostra curabitur tincidunt mi eleifend, eu quam enim feugiat. 
             </p>`
+},
+'article-two': {
+    title: 'Article Two | Prateek Sawhney',
+    heading : 'Article Two',
+    date: 'March 03, 2018',
+    content:  `<p>
+            This is my second page.This is my second page.This is my second page.This is my second page.This is my second page.This is my second page.This is my second page.This is my second page.This is my second page.This is my second page.This is my second page.This is my second page.This is my second page.This is my second page.This is my second page.This is my second page.This is my second page.This is my second page.This is my second page.This is my second page.This is my second page.This is my second page.This is my second page.This is my second page.This is my second page.
+            </p>`
+},
+'article-three': {
+    title: 'Article Three | Prateek Sawhney',
+    heading : 'Article Three',
+    date: 'March 04, 2018',
+    content:  `            <p>
+            This is my third page.This is my third page.This is my third page.This is my third page.This is my third page.This is my third page.This is my third page.This is my third page.This is my third page.This is my third page.This is my third page.This is my third page.This is my third page.This is my third page.This is my third page.This is my third page.This is my third page.This is my third page.This is my third page.This is my third page.This is my third page.
+            </p>`
+}
 };
 
 function createTemplate(data){
@@ -55,20 +73,15 @@ var htmlTemplate =`
 `;
 return htmlTemplate;
 }
+
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
-app.get('/article-one', function(req, res){
-   res.send(createTemplate(articleOne));
+
+app.get('/:articleName', function(req, res){
+   var articleName = req.params.articleName;
+   res.send(createTemplate(articles[articleName]));
     
-});
-
-app.get('/article-two', function(req, res){
-    res.sendFile(path.join(__dirname, 'ui', 'article-two.html'));
-});
-
-app.get('/article-three', function(req, res){
-    res.sendFile(path.join(__dirname, 'ui', 'article-three.html'));
 });
 
 app.get('/ui/style.css', function (req, res) {
