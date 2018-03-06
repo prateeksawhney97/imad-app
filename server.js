@@ -7,7 +7,7 @@ var config = {
     user : 'prateeksawhney97',
     database : 'prateeksawhney97',
     host : 'db.imad.hasura-app.io',
-    port : '5432',
+    port : 'localhost:5432',
     password : process.env.DB_PASSWORD
 };
 var app = express();
@@ -87,7 +87,6 @@ app.get('/', function (req, res) {
 });
 
 var pool = newPool(config);
-
 app.get('/test-db', function(req, res){
     //Make a select request.
     pool.query('SELECT * FROM test', function(err, result) {
@@ -121,7 +120,6 @@ app.get('/:articleName', function(req, res){
    res.send(createTemplate(articles[articleName]));
     
 });
-
 
 app.get('/ui/style.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'style.css'));
