@@ -15,40 +15,6 @@ password: process.env.DB_PASSWORD
 var app = express();
 app.use(morgan('combined'));
 
-
-var articles = {
-'article-one': {
-    title: 'Article One | Prateek Sawhney',
-    heading : 'Article One',
-    date: 'March 02, 2018',
-    content:  `<p>
-                Lorem ipsum dolor sit amet, dolor a dolor orci feugiat eu, duis praesent viverra, fusce vestibulum lorem. Vitae nonummyluctus turpis, dictum vel, commodo platea nunc amet, eget vefames pellentesque. Bibendum commodo eros pulvinar sed, rhoncus scelerisque malesuada. Pulvinar sed sed mollis dolor eros leo.
-            </p>
-            <p>
-               Ipsum enim vestibulum torquent. Et ipsum mauris praesent, curabitur sed malesuada semper vestibulum et nunc. Sed sodales eros blandit vestibulum, sollicitudin ac arcu tempor a enim, ac et, placerat fusce luctus. Posuere eu a proin a, et dapibus fusce bibendum id, tortor tempus blandit wisi urna, lc vulputate. 
-            </p>
-            <p>
-               Et consequat cras, at dapibus in lectus, fringilla scelerisque necipit sed aliquam eros interdum odio auctor, suscipit et. Mauris neque ut, in sed ultricies, elit veniam praesent rhoncuornare in, ullamcorper sem ut et, lacus at gravida. Optio mattis maecenas, ad pellentesque pulvinar eu ut phasellus lectus. Orci mi commodo volutpat wisi, nostra curabitur tincidunt mi eleifend, eu quam enim feugiat. 
-            </p>`
-},
-'article-two': {
-    title: 'Article Two | Prateek Sawhney',
-    heading : 'Article Two',
-    date: 'March 03, 2018',
-    content:  `<p>
-            This is my second page.This is my second page.This is my second page.This is my second page.This is my second page.This is my second page.This is my second page.This is my second page.This is my second page.This is my second page.This is my second page.This is my second page.This is my second page.This is my second page.This is my second page.This is my second page.This is my second page.This is my second page.This is my second page.This is my second page.This is my second page.This is my second page.This is my second page.This is my second page.This is my second page.
-            </p>`
-},
-'article-three': {
-    title: 'Article Three | Prateek Sawhney',
-    heading : 'Article Three',
-    date: 'March 04, 2018',
-    content:  `            <p>
-            This is my third page.This is my third page.This is my third page.This is my third page.This is my third page.This is my third page.This is my third page.This is my third page.This is my third page.This is my third page.This is my third page.This is my third page.This is my third page.This is my third page.This is my third page.This is my third page.This is my third page.This is my third page.This is my third page.This is my third page.This is my third page.
-            </p>`
-}
-};
-
 function createTemplate(data){
     var title = data.title;
     var date = data.date;
