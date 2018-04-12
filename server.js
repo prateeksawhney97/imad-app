@@ -146,8 +146,19 @@ app.get('/logout', function(req, res){
    res.send('Logged  out Successfully !');
 });
 
-var pool = new Pool(config);
 
+var pool = new Pool(config);
+app.get('/get-articles', function (req, res) {
+   // make a select request
+   // return a response with the results
+   pool.query('SELECT * FROM article ORDER BY date DESC', function (err, result) {
+      if (err) {
+          res.status(500).send(err.toString());
+      } else {
+          res.send(JSON.stringify(result.rows));
+      }
+   });
+});
 app.get('/test-db', function(req, res){
     //Make a select request.
         pool.query('SELECT * FROM test', function(err, result) {
