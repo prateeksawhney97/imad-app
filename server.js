@@ -82,9 +82,15 @@ app.post('/create-user', function(req, res){
     var dbString = hash(password, salt); 
     pool.query('INSERT INTO "user" (username, password) VALUES ($1, $2)', [username, dbString], function(err, result){
         if (err) {
-            res.status(500).send(err.toString());
+            //Changes For Android App MyBlog
+            res.setHeader('Content-Type','application/json');
+            //res.status(500).send(err.toString());
+            res.status(500).send(JSON.stringify({"error":err.toString()}));
         } else {
-            res.send('User successfully created : ' + username);
+            //Changes For Android App MyBlog
+            res.setHeader('Content-Type','application/json');
+            //res.send('User successfully created : ' + username);
+            res.send(JSON.parse('{"message":"User Successfully Created : ' + username + ' "}'));
         }
     });
 });
@@ -97,7 +103,10 @@ app.post('/login', function(req, res){
             res.status(500).send(err.toString());
         } else {
             if(result.rows.length === 0){
-                res.send(403).send('Username/Password is invalid');
+                //Changes For Android App MyBlog
+                res.setHeader('Content-Type','application/json');
+                //res.send(403).send('Username/Password is invalid');
+                res.send(403).send(JSON.parse('{"error": "Username/password is Incorrect"}'));
             } else {
             // Need to Match the password.    
             var dbString = result.rows[0].password;
@@ -109,10 +118,15 @@ app.post('/login', function(req, res){
             // Set cookie with a sesion id that it is randomly generating.
             // Internally, on the server side, it maps the sesion id to an object.
             // {auth: {userId}}
-            //
-            res.send('Credentials are correct !');
+            //res.send('Credentials are correct !');
+                    //Changes For Android App MyBlog
+            res.setHeader('Content-Type','application/json');
+            res.send(JSON.parse('{"message": "You have successfully logged in"}'));
                 } else {
-            res.send(403).send('Username/Password is invalid');
+                    //Changes For Android App MyBlog
+            res.setHeader('Content-Type','application/json');
+            res.status(403).send(JSON.parse('{"error": "Username/password is invalid"}'));                    
+            //res.send(403).send('Username/Password is invalid');
                 }
             }
         }
