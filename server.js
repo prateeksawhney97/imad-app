@@ -16,9 +16,9 @@ var session = require('express-session');
 
 var config = {
 
-    user: 'coco98',
+    user: 'prateeksawhney97',
 
-    database: 'coco98',
+    database: 'prateeksawhney97',
 
     host: 'db.imad.hasura-app.io',
 
