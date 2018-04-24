@@ -84,9 +84,15 @@ app.post('/create-user', function (req, res) {
    var dbString = hash(password, salt);
    pool.query('INSERT INTO "user" (username, password) VALUES ($1, $2)', [username, dbString], function (err, result) {
       if (err) {
-          res.status(500).send(err.toString());
+          //For Android App MyBlog
+          //res.status(500).send(err.toString());
+          res.setHeader('Content-Type', 'application/json');
+          res.status(500).send(JSON.stringify({"error":err.toString()}));
       } else {
-          res.send('User successfully created: ' + username);
+          //For Android App MyBlog
+          res.setHeader('Content-Type', 'application/json');
+          res.send(JSON.parse('{"message":"User Successfully created: ' + username + ' "}'));
+          //res.send('User successfully created: ' + username);
       }
    });
 });
@@ -98,7 +104,10 @@ app.post('/login', function (req, res) {
           res.status(500).send(err.toString());
       } else {
           if (result.rows.length === 0) {
-              res.status(403).send('username/password is invalid');
+              //For Android App MyBlog
+              res.setHeader('Content-Type', 'application/json');
+              res.status(403).send(JSON.parse('{"error": "Username/Password is invalid"}'));
+              //res.status(403).send('username/password is invalid');
           } else {
               // Match the password
               var dbString = result.rows[0].password;
@@ -110,9 +119,15 @@ app.post('/login', function (req, res) {
                 // set cookie with a session id
                 // internally, on the server side, it maps the session id to an object
                 // { auth: {userId }}
-                res.send('credentials correct!');
+                //For Android App MyBlog
+                res.setHeader('Content-Type', 'application/json');
+                res.send(JSON.parse('{"message": "You have successfully logged in"}'));
+                //res.send('credentials correct!');
               } else {
-                res.status(403).send('username/password is invalid');
+                //For Android App MyBlog
+                res.setHeader('Content-Type', 'application/json');
+                res.status(403).send(JSON.parse('{"error": "Username/Password is invalid"}'));
+                //res.status(403).send('username/password is invalid');
               }
           }
       }
